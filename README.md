@@ -1,7 +1,7 @@
 ##"Dzikie bociany"
 
 
-=Zespół:
+Zespół:
 * Arkadiusz Janowski
 * Michał Jaworowski
 * Przemysław Paluch
