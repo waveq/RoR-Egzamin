@@ -1,0 +1,67 @@
+
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <a class="brand" href="/gists">My gists</a>
+
+      <div class="nav-collapse collapse">
+       <ul class="nav">
+        <li>
+          <a href="/gists">MyGists</a>
+        </li>
+        <li>
+          <a href="https://github.com/janusy/my_gists">Github</a>
+        </li>
+        <li>
+          <a href="/gists/new">Add gist</a>
+        </li>
+      </ul>
+
+
+	<ul class="nav pull-right hidden-xs"  style="display: block !important;">
+        <form class="navbar-form navbar-left pull-right" role="search" action="/gists/search">
+          <div class="form-group">
+            <%= select_tag(:lang, options_for_select(Pygments.lexers.keys.sort.map! {|l| l.downcase.strip},
+             params[:lang]))%>
+           </div>
+           <button type="submit" class="btn btn-default">Search</button>
+         </form>
+       </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="center hero-unit">
+
+
+<p id="notice"><%= notice %></p>
+<div class="show_info">
+<p>
+  <strong>Lang:</strong>
+  <%= @gist.lang %>
+</p>
+<p>
+  <strong>Description:</strong>
+  <%= @gist.description %>
+</p>
+<p>
+  <strong>Snippet:</strong>
+</p>
+</div>
+<div style="clear:both;"></div>
+
+
+<%= raw Pygments.highlight(@gist.snippet, lexer: @gist.lang) %>
+
+<%= link_to 'Edit', edit_gist_path(@gist), :class => "btn btn-large" %> 
+<%= link_to 'Back', gists_path, :class => "btn btn-large btn-primary" %>
+</div>

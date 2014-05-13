@@ -1,0 +1,101 @@
+
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <a class="brand" href="/gists">My gists</a>
+
+      <div class="nav-collapse collapse">
+       <ul class="nav">
+        <li>
+          <a href="/gists">MyGists</a>
+        </li>
+        <li>
+          <a href="https://github.com/janusy/my_gists">Github</a>
+        </li>
+        <li>
+          <a href="/gists/new">Add gist</a>
+        </li>
+      </ul>
+
+
+	<ul class="nav pull-right hidden-xs"  style="display: block !important;">
+        <form class="navbar-form navbar-left pull-right" role="search" action="/gists/search">
+          <div class="form-group">
+            <%= select_tag(:lang, options_for_select(Pygments.lexers.keys.sort.map! {|l| l.downcase.strip},
+             params[:lang]))%>
+           </div>
+           <button type="submit" class="btn btn-small active"><i class="icon-search"></i></button>
+         </form>
+       </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="center hero-unit">
+
+
+<h1>Your gists</h1>
+
+
+
+<table>
+  <thead id="header_thread">
+    <tr>
+      <th>Snippet</th>
+      <th>Lang</th>
+      <th>Description</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody id="gists-list">
+<%= will_paginate %>
+
+       		<%= render @gists %>
+
+
+  </tbody>
+</table>
+<br>
+
+<div id="infinite-scrolling" disabled="true">
+    <%= will_paginate %>
+</div>
+
+<%= link_to 'New Gist', new_gist_path, :class => "btn btn-large btn-inverse" %>
+
+
+
+<footer class="footer">
+  <small>
+	my_gists by 
+    <a href="https://github.com/janusy/">janusy</a>
+  </small>
+  <nav>
+    <ul>
+	<li>
+          <a href="/gists">MyGists</a>
+        </li>
+        <li>
+          <a href="https://github.com/janusy/my_gists">Github</a>
+        </li>
+        <li>
+          <a href="/gists/new">Add gist</a>
+        </li>
+    </ul>
+  </nav>
+</footer>
+</div>
+

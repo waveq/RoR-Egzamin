@@ -1,0 +1,52 @@
+
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <a class="brand" href="/gists">My gists</a>
+
+      <div class="nav-collapse collapse">
+       <ul class="nav">
+        <li>
+          <a href="/gists">MyGists</a>
+        </li>
+        <li>
+          <a href="https://github.com/janusy/my_gists">Github</a>
+        </li>
+        <li>
+          <a href="/gists/new">Add gist</a>
+        </li>
+      </ul>
+
+
+	<ul class="nav pull-right hidden-xs"  style="display: block !important;">
+        <form class="navbar-form navbar-left pull-right" role="search" action="/gists/search">
+          <div class="form-group">
+            <%= select_tag(:lang, options_for_select(Pygments.lexers.keys.sort.map! {|l| l.downcase.strip},
+             params[:lang]))%>
+           </div>
+           <button type="submit" class="btn btn-small active"><i class="icon-search"></i></button>
+         </form>
+       </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="center hero-unit">
+
+<h1>Editing gist</h1>
+
+<%= render 'form' %>
+
+</div>
+
+<%= link_to 'Show', @gist %> |
+<%= link_to 'Back', gists_path %>

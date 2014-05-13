@@ -1,0 +1,127 @@
+
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <a class="brand" href="/gists">My gists</a>
+
+      <div class="nav-collapse collapse">
+       <ul class="nav">
+        <li>
+          <a href="/gists">MyGists</a>
+        </li>
+        <li>
+          <a href="https://github.com/janusy/my_gists">Github</a>
+        </li>
+        <li>
+          <a href="/gists/new">Add gist</a>
+        </li>
+      </ul>
+
+
+	<ul class="nav pull-right hidden-xs"  style="display: block !important;">
+        <form class="navbar-form navbar-left pull-right" role="search" action="/gists/search">
+          <div class="form-group">
+            <%= select_tag(:lang, options_for_select(Pygments.lexers.keys.sort.map! {|l| l.downcase.strip},
+             params[:lang]))%>
+           </div>
+           <button type="submit" class="btn btn-small active"><i class="icon-search"></i></button>
+         </form>
+       </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<div class="center hero-unit">
+
+
+<h1>Your gists</h1>
+
+<table>
+  <thead id="header_thread">
+    <tr>
+      <th>Snippet</th>
+      <th>Lang</th>
+      <th>Description</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @gists.each do |gist| %>
+      <tr style="height:100px;">
+        <td class="snippet_box"><%= raw Pygments.highlight(gist.snippet.length > 30 ? gist.snippet[0,90] + "" : gist.snippet, lexer: gist.lang) %>
+	
+	<div class="mobile_box">
+		<h4>lang: <%= gist.lang %></h4>
+		description: <div class="highlight"><pre style="background-color: #ccc;"><%= gist.description %></pre></div>
+	</div>
+
+
+	<div class="btn-group" style="margin-bottom:60px;">
+	  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+	    Action <span class="caret"></span>
+	  </button>
+	  <ul class="dropdown-menu" role="menu">
+	    <li><%= link_to 'Show', gist%></li>
+	    <li><%= link_to 'Edit', edit_gist_path(gist) %></li>
+	    <li><%= link_to 'Destroy', gist, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+	  </ul>
+	</div>
+
+
+	</td> 
+        <td class="lang_box"><%= gist.lang %></td>
+        <td class="description_box"><%= gist.description %></td>
+        <td class="button_show"><%= link_to 'Show', gist, :class => "btn btn-large" %></td>
+        <td class="button_edit"><%= link_to 'Edit', edit_gist_path(gist), :class => "btn btn-large" %></td>
+        <td class="button_delete"><%= link_to 'Destroy', gist, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-large btn-danger" %>
+
+
+</td>
+	
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Gist', new_gist_path, :class => "btn btn-large btn-inverse" %>
+
+
+
+<footer class="footer">
+  <small>
+	my_gists by 
+    <a href="https://github.com/janusy/">janusy</a>
+  </small>
+  <nav>
+    <ul>
+	<li>
+          <a href="/gists">MyGists</a>
+        </li>
+        <li>
+          <a href="https://github.com/janusy/my_gists">Github</a>
+        </li>
+        <li>
+          <a href="/gists/new">Add gist</a>
+        </li>
+    </ul>
+  </nav>
+</footer>
+</div>
+
